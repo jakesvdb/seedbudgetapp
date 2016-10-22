@@ -1,0 +1,71 @@
+<style type="text/css">
+  .form-horizontal input.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+  }
+ 
+  .form-horizontal input.ng-valid.ng-dirty {
+    border-color: #78FA89;
+  }
+</style>
+<div class="view">
+    <div class="container">
+        <div class="row">
+        <nav class= "navbar navbar-default" role= "navigation" >
+        <div class= "navbar-header" >
+        <a class= "navbar-brand" href= "#/categories"><i class="glyphicon glyphicon-th-large"></i> Categories List </a>
+        <a ng-show="category._id" class= "navbar-brand" href= "#/edit-category/0"><i class="glyphicon glyphicon-plus"></i> Create Category </a>
+        <a ng-show="category._id" class= "navbar-brand pull-right"><i class="glyphicon glyphicon-edit"></i> Currently Editing Category Number: {{category._id}}</a>
+        </div>
+        </nav>
+        <header>
+            <h3>{{title}}</h3>
+        </header>
+        <div class="col-md-12">
+ 
+<form role="form" name="categoryForm" class="form-horizontal">
+<div class="row">
+<div class= "form-group" ng-class="{error: categoryForm.id.$invalid}">
+    <label class= "col-md-2"> Id </label>
+    <div class="col-md-4">
+        <input name="id" ng-model="category.id" type= "text" class= "form-control" placeholder="Your id" required/>
+        <span ng-show="categoryForm.id.$dirty && categoryForm.id.$invalid" class="help-inline">Id Required</span>
+    </div>
+</div>
+<div class= "form-group">
+    <label class= "col-md-2"> Description </label>
+    <div class="col-md-4">
+        <input name="description" ng-model="category.description" type= "text" class= "form-control" placeholder="Enter description" required/>
+        <span ng-show="categoryForm.description.$dirty && categoryForm.description.$invalid" class="help-inline">Description Required</span>
+    </div>
+</div>
+<div class= "form-group">
+    <label class= "col-md-2">Monthly </label>
+    <div class="col-md-4">
+        <input name="monthly" ng-model="category.monthly" type= "text" class= "form-control" placeholder= "Monthly budget"/>
+        <span ng-show="categoryForm.monthly.$dirty && categoryForm.monthly.$invalid" class="help-inline">Monthly Required</span>
+    </div>
+</div>
+<div class= "form-group">
+    <label class= "col-md-2">BudgetAmount </label>
+    <div class="col-md-4">
+    <input name="budgetAmount" ng-model="category.budgetAmount" type= "number" value="0.00" class= "form-control" placeholder= "BudgetAmount"/>
+    <span ng-show="categoryForm.budgetAmount.$dirty && categoryForm.budgetAmount.$invalid" class="help-inline">Amount Required</span>
+    </div>
+</div>
+
+<div class= "form-group">
+    <label class= "col-md-2"></label>
+    <div class="col-md-4">
+    <a href="#/" class="btn">Cancel</a>
+        <button ng-click="saveCategory(category);" 
+                ng-disabled="isClean() || categoryForm.$invalid"
+                class="btn btn-primary">{{buttonText}}</button>
+        <button ng-click="deletecategory(category)"
+                ng-show="category._id" class="btn btn-warning">Delete</button>
+    </div>
+</div>
+</div>
+</form>
+        </div></div>
+    </div>
+</div>

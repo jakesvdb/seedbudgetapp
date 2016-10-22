@@ -1,31 +1,31 @@
 
 angular.module('angularJsApp') 
-.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams, services, customer) {
-    var categoryID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
-    $rootScope.title = (categoryID > 0) ? 'Edit Customer' : 'Add Customer';
-    $scope.buttonText = (categoryID > 0) ? 'Update Customer' : 'Add New Customer';
-      var original = customer.data;
-      original._id = categoryID;
-      $scope.customer = angular.copy(original);
-      $scope.customer._id = categoryID;
+.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams, services, category) {
+    var categoryID = ($routeParams.categoryID) ? parseInt($routeParams.categoryID) : 0;
+    $rootScope.title = (categoryID > 0) ? 'Edit Category' : 'Add Category';
+    $scope.buttonText = (categoryID > 0) ? 'Update Category' : 'Add New Category';
+      var original = category;
+      original.id = categoryID;
+      $scope.category = angular.copy(original);
+      $scope.category._id = categoryID;
  
       $scope.isClean = function() {
-        return angular.equals(original, $scope.customer);
+        return angular.equals(original, $scope.category);
       }
  
-      $scope.deleteCustomer = function(customer) {
+      $scope.deleteCategory = function(category) {
         $location.path('/');
-        if(confirm("Are you sure to delete customer number: "+$scope.customer._id)==true)
-        services.deleteCustomer(customer.customerNumber);
+        if(confirm("Are you sure to delete category number: "+$scope.category._id)==true)
+        services.deleteCategory(category.CategoryNumber);
       };
  
-      $scope.saveCustomer = function(customer) {
+      $scope.saveCategory = function(category) {
         $location.path('/');
         if (categoryID <= 0) {
-            services.insertCustomer(customer);
+            services.insertCategory(category);
         }
         else {
-            services.updateCustomer(categoryID, customer);
+            services.updateCategory(categoryID, category);
         }
     };
 });
